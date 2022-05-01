@@ -3,10 +3,10 @@ import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognitio
 import {Button} from "semantic-ui-react";
 import "./Dictaphone.css"
 
-const Dictaphone = () => {
+const Dictaphone = (props) => {
 
-
-    const [message, setMessage] = useState('Click the Microphone to start Speech Recognition --- When finished say Done.')
+    const {nextPage} = props;
+    const [message, setMessage] = useState('Click to record your response  --- When finished say Done.')
     const commands = [
         {
             command: 'I would like to order *',
@@ -29,23 +29,27 @@ const Dictaphone = () => {
             callback: ({ command }) => setMessage(`Hi there! You said: "${command}"`),
             matchInterim: true
         },
-        {
-            command: 'Beijing',
-            callback: (command, spokenPhrase, similarityRatio) => setMessage(`${command} and ${spokenPhrase} are ${similarityRatio * 100}% similar`),
-            // If the spokenPhrase is "Benji", the message would be "Beijing and Benji are 40% similar"
-            isFuzzyMatch: true,
-            fuzzyMatchingThreshold: 0.2
-        },
-        {
-            command: ['eat', 'sleep', 'leave'],
-            callback: (command) => setMessage(`Best matching command: ${command}`),
-            isFuzzyMatch: true,
-            fuzzyMatchingThreshold: 0.2,
-            bestMatchOnly: true
-        },
+        // {
+        //     command: 'Beijing',
+        //     callback: (command, spokenPhrase, similarityRatio) => setMessage(`${command} and ${spokenPhrase} are ${similarityRatio * 100}% similar`),
+        //     // If the spokenPhrase is "Benji", the message would be "Beijing and Benji are 40% similar"
+        //     isFuzzyMatch: true,
+        //     fuzzyMatchingThreshold: 0.2
+        // },
+        // {
+        //     command: ['eat', 'sleep', 'leave'],
+        //     callback: (command) => setMessage(`Best matching command: ${command}`),
+        //     isFuzzyMatch: true,
+        //     fuzzyMatchingThreshold: 0.2,
+        //     bestMatchOnly: true
+        // },
         {
             command: 'clear',
             callback: ({ resetTranscript }) => resetTranscript()
+        },
+        {
+            command: 'done',
+            callback: () => {SpeechRecognition.stopListening(); nextPage();}
         }
     ]
     const {
@@ -65,7 +69,9 @@ const Dictaphone = () => {
         return <span>Browser doesn't support speech recognition.</span>;
     }
 
-
+    function clearMessage(){
+        setMessage("")
+    }
 
 
     return (
@@ -73,7 +79,8 @@ const Dictaphone = () => {
             {/*<p>Microphone: {listening ? 'on' : 'off'}</p>*/}
             <div className={"centered"}>
                 <Button  inverted={true} size={"large"}  icon={(!listening) ? "microphone" : "microphone slash"} basic
-                         onClick={(listening) ? SpeechRecognition.stopListening : () => SpeechRecognition.startListening({ continuous: true })}/>
+                         onClick={(listening) ? SpeechRecognition.stopListening :
+                                                () => SpeechRecognition.startListening({ continuous: true }) || clearMessage()}/>
                 {/*<Button  inverted={true} size={"large"} content='STOP' basic*/}
                 {/*         onClick={SpeechRecognition.stopListening}/>*/}
                 {/*<Button  inverted={true} size={"large"} content='CLEAR' basic*/}

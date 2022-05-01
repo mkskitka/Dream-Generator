@@ -21,10 +21,21 @@ position: relative;
   position: absolute;
   z-index: -1;
   animation: float 60s infinite;
-
 }
+
+#prompt {
+  width: 80%;
+  margin: 0px auto;
+  font-family: "Bubble",  Regular !important;
+  color: white;
+  top: 30vh;
+position: relative;
+}
+
 #dictaphone {
   z-index: 1;
+  top: 40vh;
+  position: relative;
 }
 #dream-generator-logo {
   /*font-family: 'Lobster', cursive;*/
