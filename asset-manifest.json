@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/Dream-Generator/static/css/main.3cf9e9b1.css",
-    "main.js": "/Dream-Generator/static/js/main.d2f6185a.js",
-    "static/js/787.722a8a3e.chunk.js": "/Dream-Generator/static/js/787.722a8a3e.chunk.js",
-    "static/media/logo.svg": "/Dream-Generator/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
-    "index.html": "/Dream-Generator/index.html",
-    "main.3cf9e9b1.css.map": "/Dream-Generator/static/css/main.3cf9e9b1.css.map",
-    "main.d2f6185a.js.map": "/Dream-Generator/static/js/main.d2f6185a.js.map",
-    "787.722a8a3e.chunk.js.map": "/Dream-Generator/static/js/787.722a8a3e.chunk.js.map"
+    "main.css": "/dream-generator/static/css/main.3cf9e9b1.css",
+    "main.js": "/dream-generator/static/js/main.2ba9053a.js",
+    "static/js/787.722a8a3e.chunk.js": "/dream-generator/static/js/787.722a8a3e.chunk.js",
+    "static/media/logo.svg": "/dream-generator/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "index.html": "/dream-generator/index.html",
+    "main.3cf9e9b1.css.map": "/dream-generator/static/css/main.3cf9e9b1.css.map",
+    "main.2ba9053a.js.map": "/dream-generator/static/js/main.2ba9053a.js.map",
+    "787.722a8a3e.chunk.js.map": "/dream-generator/static/js/787.722a8a3e.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.3cf9e9b1.css",
-    "static/js/main.d2f6185a.js"
+    "static/js/main.2ba9053a.js"
   ]
 }
