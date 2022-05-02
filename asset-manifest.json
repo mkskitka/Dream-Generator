@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/Dream-Generator/static/css/main.3cf9e9b1.css",
-    "main.js": "/Dream-Generator/static/js/main.dda14c94.js",
+    "main.css": "/Dream-Generator/static/css/main.c4598f93.css",
+    "main.js": "/Dream-Generator/static/js/main.595aecbf.js",
     "static/js/787.6927014a.chunk.js": "/Dream-Generator/static/js/787.6927014a.chunk.js",
     "static/media/logo.svg": "/Dream-Generator/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
     "index.html": "/Dream-Generator/index.html",
-    "main.3cf9e9b1.css.map": "/Dream-Generator/static/css/main.3cf9e9b1.css.map",
-    "main.dda14c94.js.map": "/Dream-Generator/static/js/main.dda14c94.js.map",
+    "main.c4598f93.css.map": "/Dream-Generator/static/css/main.c4598f93.css.map",
+    "main.595aecbf.js.map": "/Dream-Generator/static/js/main.595aecbf.js.map",
     "787.6927014a.chunk.js.map": "/Dream-Generator/static/js/787.6927014a.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.3cf9e9b1.css",
-    "static/js/main.dda14c94.js"
+    "static/css/main.c4598f93.css",
+    "static/js/main.595aecbf.js"
   ]
 }
