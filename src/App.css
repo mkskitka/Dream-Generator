@@ -27,7 +27,9 @@ position: relative;
   width: 80%;
   margin: 0px auto;
   font-family: "Bubble",  Regular !important;
+  line-height: 1.6;
   color: white;
+  font-size: 32px;
   top: 30vh;
 position: relative;
 }
@@ -89,6 +91,13 @@ Button {
   font-family: "Bubble",  Regular !important;
   animation: pulse 1s infinite;
 }
+
+#mic-button {
+  visibility: hidden;
+  /*animation: pulse 1s infinite;*/
+
+
+}
 #day-img {
   position: absolute;
   top: 33vh;
@@ -96,13 +105,30 @@ Button {
 }
 @keyframes pulse {
   0% {
-    opacity: 1;
+    opacity: .8;
+    /*transform: scale(1);*/
   }
   50% {
-    opacity: .8;
+    opacity: 1;
+    transform: scale(1.05,1.05);
   }
   100% {
+    opacity: .8;
+    /*transform: scale(1);*/
+  }
+}
+@keyframes pulse12 {
+  0% {
+    opacity: .8;
+    /*transform: scale(1);*/
+  }
+  50% {
     opacity: 1;
+    transform: scale(1.2,1.2);
+  }
+  100% {
+    opacity: .8;
+    /*transform: scale(1);*/
   }
 }
 
