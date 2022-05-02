@@ -3,13 +3,16 @@ import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognitio
 import {Button} from "semantic-ui-react";
 import "./Dictaphone.css"
 import {SPEAK} from "../constants";
-import {cancelType} from "./TypeWriter";
+import {useDispatch, useSelector} from "react-redux";
 
 let preventSkip = false;
 const Dictaphone = (props) => {
 
-    const {nextPage, promptFinished, story, setStory} = props;
+    const {nextPage, promptFinished} = props;
     const [message, setMessage] = useState("")
+    const story = useSelector((state) => state.dreamStory)
+    const dispatch = useDispatch();
+
     const commands = [
         {
             command: 'restart',
@@ -23,14 +26,13 @@ const Dictaphone = (props) => {
             command: 'done',
             callback: () => done(),
             isFuzzyMatch: true,
-            fuzzyMatchingThreshold: .1
+            fuzzyMatchingThreshold: .8
         }
     ]
 
     function done() {
         setMessage("");
         saveTranscript();
-        nextPage();
     }
     const {
         transcript,
@@ -72,7 +74,7 @@ const Dictaphone = (props) => {
     function saveTranscript(){
         let updatedStory = story + removeLastWord(transcript) + " ";
         console.log("updated story: ", updatedStory)
-        setStory(updatedStory);
+        dispatch({type:"updateDreamStory", story: updatedStory});
     }
 
     function randomIntFromInterval(min, max) { // min and max included

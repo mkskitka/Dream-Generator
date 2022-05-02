@@ -2,23 +2,31 @@ import logo from './logo.svg';
 import './App.css';
 import {Button} from "semantic-ui-react";
 import Dictaphone from "./Components/Dictaphone";
-import {useState, useEffect} from "react";
+import React, {useState, useEffect} from "react";
 import $ from 'jquery';
 import {PROMPTS, DESCRIPTION} from './constants.js';
 import {typeWriter, cancelType} from "./Components/TypeWriter";
-import {clear} from "@testing-library/user-event/dist/clear";
-// import 'semantic-ui-css/semantic.min.css';
-// import './semantic.css';
+import {useDispatch, useSelector} from 'react-redux';
+
+
 
 function App() {
     const [page, setPage] = useState(0);
-    const [story, setStory] = useState("");
     const [promptFinished, setPromptFinished] = useState(false);
     const [helpPageOpen, setHelpPageOpen] = useState(false)
+    const story = useSelector((state) => state.dreamStory)
+    const dispatch = useDispatch();
 
+
+    useEffect(function () {
+        if(story !== "") {
+            nextPage();
+        }
+    }, [story])
 
     function nextPage() {
         let classN = (page===0) ? ".page0" : ".page";
+        console.log("story: ", story)
         $(classN).fadeOut(1000, function (){
             $(".page").fadeIn(1000);
             setPromptFinished(false)
@@ -50,14 +58,14 @@ function App() {
     // Execute a function when the user presses a key on the keyboard
     window.addEventListener("keypress", function(event) {
         // If the user presses the "Enter" key on the keyboard
-        //event.preventDefault();
+        event.preventDefault();
         if (event.key === "Enter" && !promptFinished) {
             cancelType()
         }
     });
 
     function restart() {
-        setStory("");
+        dispatch({type: "updateDreamStory", story: ""})
         setPage(0)
         $(".page").fadeOut(0);
         $("#full-story").fadeOut(0);
@@ -89,7 +97,7 @@ function App() {
             <div className={"page"}>
                 <div id={"prompt"}></div>
                 <div id={"dictaphone"}>
-                    <Dictaphone nextPage={nextPage} promptFinished={promptFinished} story={story} setStory={setStory}/>
+                    <Dictaphone nextPage={nextPage} promptFinished={promptFinished}/>
                 </div>
             </div>
 
