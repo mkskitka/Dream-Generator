@@ -4,61 +4,24 @@ import {Button} from "semantic-ui-react";
 import Dictaphone from "./Components/Dictaphone";
 import {useState, useEffect} from "react";
 import $ from 'jquery';
-import {PROMPTS} from './constants.js';
+import {PROMPTS, DESCRIPTION} from './constants.js';
+import {typeWriter} from "./Components/TypeWriter";
 import {clear} from "@testing-library/user-event/dist/clear";
 // import 'semantic-ui-css/semantic.min.css';
 // import './semantic.css';
-const speed = 50;
-var i =0;
+
 function App() {
     const [page, setPage] = useState(0)
-    const [promptFinished, setPromptFinished] = useState(false)
+    const [promptFinished, setPromptFinished] = useState(false);
+    const [helpPageOpen, setHelpPageOpen] = useState(false)
 
-    function typeWriter(id, txt) {
-        if (i < txt.length) {
-            if(txt.charAt(i) === '*') {
-                i++;
-                let seconds = parseInt(txt.charAt(i));
-                let ms = seconds * 1000;
-                i++;
-                addChar(id, txt, ms);
-            }
-            else if(txt.charAt(i) === '.' || txt.charAt(i) === '?') {
-                addChar(id, txt, 2000);
-            }
-            else if(txt.charAt(i) === ',') {
-                addChar(id, txt, 200);
-            }
-            else if(txt.charAt(i) === '$') {
-                clearTxt(id, txt)
-            }
-            else {
-                addChar(id, txt);
-            }
-        }
-        else {
-            setPromptFinished(true)
-        }
-    }
-
-    function clearTxt(id, txt) {
-        document.getElementById(id).innerHTML = "";
-        i++;
-        setTimeout(() => typeWriter(id, txt), speed);
-    }
-    function addChar(id, txt, s=speed) {
-        document.getElementById(id).innerHTML += txt.charAt(i);
-        i++;
-        setTimeout(() => typeWriter(id, txt), s);
-    }
 
     function startDream() {
         $(".page" +page).fadeOut(1000, function (){
             $(".page" +(page+1)).fadeIn(1000);
             setPromptFinished(false)
             document.getElementById("prompt").innerHTML = "";
-            i = 0;
-            typeWriter("prompt", PROMPTS[page+1])
+            typeWriter("prompt", PROMPTS[page+1], () => setPromptFinished(true))
             setPage(page+1);
         });
     }
@@ -67,9 +30,18 @@ function App() {
         $(".page2").fadeOut(0);
         $(".page3").fadeOut(0);
     }, [])
+
+    useEffect(function (){
+        console.log("help page is now ", helpPageOpen)
+        if(helpPageOpen) {
+            typeWriter("description", DESCRIPTION)
+        }
+    }, [helpPageOpen])
+
+
     return (
     <div className="App">
-        <div id={"help"}>?</div>
+        <div onClick={() => setHelpPageOpen(!helpPageOpen)} id={"help-button"}>?</div>
         <img id="cloud-img" src={"wispy2.png"}/>
             {/*/***********************************************************************************************************/}
             {/*                                                                                                           */}
@@ -94,6 +66,27 @@ function App() {
                     <Dictaphone nextPage={startDream} promptFinished={promptFinished}/>
                 </div>
             </div>
+            {/*/***********************************************************************************************************/}
+            {/*                                                                                                           */}
+            {/*                                                   Help                                                    */}
+            {/*                                                                                                           */}
+            {/* ********************************************************************************************************* */}
+            {helpPageOpen &&
+            <div id={"help-page"}>
+                <img id="cloud-img" src={"wispy2.png"}/>
+                <div onClick={() => setHelpPageOpen(!helpPageOpen)} className={"big right close"}>X</div>
+                <div className={"linebreak"}></div>
+                <div id="description" className={"medium description"}></div>
+                <div className={"linebreak"}></div>
+                <div className={"medium commands"}>verbal commands</div>
+                <div className={"linebreak"}></div>
+                <div id={"command-container"}>
+                    <div className={"medium left half"}>Save  </div><div className={"medium right half"}>Saves Response</div>
+                    <div className={"medium left half"}>Clear  </div><div className={"medium right half"}>Clears Response</div>
+                    <div className={"medium left half"}>Restart </div><div className={"medium right half"}>Restarts Prompt</div>
+                </div>
+
+            </div>}
     </div>
   );
 }
