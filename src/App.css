@@ -58,7 +58,7 @@ position: relative;
 
 @media (prefers-reduced-motion: no-preference) {
   #help-button {
-    animation: spin infinite 20s linear;
+    animation: spin infinite 5s linear;
   }
 }
 
@@ -129,17 +129,22 @@ position: relative;
 }
 .close {
   cursor: pointer;
+  font-size: 36px;
+  margin: 8px;
 }
 Button {
   /*font-weight: bolder !important;*/
 }
 
 @keyframes spin {
-  from {
-    transform: rotate(0deg);
+  0% {
+    transform: rotate(-10deg);
   }
-  to {
-    transform: rotate(360deg);
+  50% {
+    transform: rotate(12deg);
+  }
+  100% {
+    transform: rotate(-10deg);
   }
 }
 .pronounced-button {
@@ -162,8 +167,10 @@ Button {
   font-family: "Bubble",  Regular !important;
 }
 #story {
-  top: 30vh;
+  top: 20vh;
   position: relative;
+  width: 80%;
+  margin: 0px auto;
 }
 #mic-button {
   visibility: hidden;

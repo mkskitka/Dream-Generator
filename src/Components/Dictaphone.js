@@ -71,6 +71,7 @@ const Dictaphone = (props) => {
     }
     function saveTranscript(){
         let updatedStory = story + removeLastWord(transcript) + " ";
+        console.log("updated story: ", updatedStory)
         setStory(updatedStory);
     }
 

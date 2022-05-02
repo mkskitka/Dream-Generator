@@ -10,6 +10,44 @@ export function cancelType() {
     cancel = true;
 }
 
+function randomInt(min, max) { // min and max included
+    return Math.floor(Math.random() * (max - min + 1) + min)
+}
+
+const charSpeeds = {
+    'a': 50,
+    'b': 70,
+    'c': 80,
+    'd': 40,
+    'e': 50,
+    'f': 60,
+    'g': 70,
+    'h': 70,
+    'i': 60,
+    'j': 90,
+    'k': 60,
+    'l': 40,
+    'm': 50,
+    'n': 100,
+    'o': 60,
+    'p': 70,
+    'q': 150,
+    'r': 60,
+    's': 40,
+    't': 50,
+    'u': 50,
+    'v': 130,
+    'w': 110,
+    'x': 110,
+    'y': 60,
+    'z': 100,
+    ' ': randomInt(30, 150),
+    '.': 1500,
+    '?': 1500,
+    '!': 1000,
+    ',': 500
+}
+
 function type(i, id, txt, speed, callback) {
 
     if (i < txt.length) {
@@ -26,14 +64,8 @@ function type(i, id, txt, speed, callback) {
             i++;
             addChar(i, id, txt, ms, callback);
         }
-        else if(txt.charAt(i) === '.' || txt.charAt(i) === '?') {
-            addChar(i, id, txt, 2000, callback);
-        }
-        else if(txt.charAt(i) === '!') {
-            addChar(i, id, txt, 1000, callback);
-        }
-        else if(txt.charAt(i) === ',') {
-            addChar(i, id, txt, 200, callback);
+        else if(Object.keys(charSpeeds).includes(txt.charAt(i))) {
+            addChar(i, id, txt, charSpeeds[txt.charAt(i)], callback);
         }
         else {
             addChar(i, id, txt, speedd, callback);

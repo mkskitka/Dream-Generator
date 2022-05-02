@@ -62,7 +62,6 @@ function App() {
         $(".page").fadeOut(0);
         $("#full-story").fadeOut(0);
         $(".page0").fadeIn(1000);
-
     }
 
 
@@ -113,7 +112,7 @@ function App() {
             {helpPageOpen &&
             <div id={"help-page"}>
                 <img id="cloud-img" src={"wispy2.png"}/>
-                <div onClick={() => setHelpPageOpen(!helpPageOpen)} className={"big right close"}>X</div>
+                <div onClick={() => setHelpPageOpen(!helpPageOpen)} className={"medium right close"}>X</div>
                 <div className={"linebreak"}></div>
                 <div id="description" className={"medium description"}></div>
                 <div className={"linebreak"}></div>

@@ -1,6 +1,5 @@
 {
   "name": "Dream-Generator",
-  "homepage": "https://mkskitka.github.io/Dream-Generator/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
