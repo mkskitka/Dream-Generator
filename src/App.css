@@ -142,17 +142,35 @@ Button {
     transform: rotate(360deg);
   }
 }
-#start-button {
-  top: 50vh;
+.pronounced-button {
+  position: relative;
   font-family: "Bubble",  Regular !important;
   animation: pulse 1s infinite;
 }
 
+#start-button {
+  top: 50vh;
+}
+#save-button {
+  position: relative;
+  margin: 20px;
+  top: 60vh;
+}
+
+#full-story {
+  position: relative;
+  font-family: "Bubble",  Regular !important;
+}
+#story {
+  top: 30vh;
+  position: relative;
+}
 #mic-button {
   visibility: hidden;
   /*animation: pulse 1s infinite;*/
-
-
+}
+.circle {
+  animation: pulse 1s infinite !important;
 }
 #day-img {
   position: absolute;

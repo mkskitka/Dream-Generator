@@ -5,30 +5,39 @@ import Dictaphone from "./Components/Dictaphone";
 import {useState, useEffect} from "react";
 import $ from 'jquery';
 import {PROMPTS, DESCRIPTION} from './constants.js';
-import {typeWriter} from "./Components/TypeWriter";
+import {typeWriter, cancelType} from "./Components/TypeWriter";
 import {clear} from "@testing-library/user-event/dist/clear";
 // import 'semantic-ui-css/semantic.min.css';
 // import './semantic.css';
 
 function App() {
-    const [page, setPage] = useState(0)
+    const [page, setPage] = useState(0);
+    const [story, setStory] = useState("");
     const [promptFinished, setPromptFinished] = useState(false);
     const [helpPageOpen, setHelpPageOpen] = useState(false)
 
 
-    function startDream() {
-        $(".page" +page).fadeOut(1000, function (){
-            $(".page" +(page+1)).fadeIn(1000);
+    function nextPage() {
+        let classN = (page===0) ? ".page0" : ".page";
+        $(classN).fadeOut(1000, function (){
+            $(".page").fadeIn(1000);
             setPromptFinished(false)
             document.getElementById("prompt").innerHTML = "";
-            typeWriter("prompt", PROMPTS[page+1], () => setPromptFinished(true))
-            setPage(page+1);
+            if(page + 1 === PROMPTS.length) {
+                document.getElementById("story").innerHTML = story;
+                $("#full-story").fadeIn(1000);
+            }
+            else {
+
+                typeWriter("prompt", PROMPTS[page + 1], () => setPromptFinished(true))
+                setPage(page + 1);
+
+            }
         });
     }
     useEffect(function (){
-        $(".page1").fadeOut(0);
-        $(".page2").fadeOut(0);
-        $(".page3").fadeOut(0);
+        $(".page").fadeOut(0);
+        $("#full-story").fadeOut(0);
     }, [])
 
     useEffect(function (){
@@ -37,6 +46,24 @@ function App() {
             typeWriter("description", DESCRIPTION)
         }
     }, [helpPageOpen])
+
+    // Execute a function when the user presses a key on the keyboard
+    window.addEventListener("keypress", function(event) {
+        // If the user presses the "Enter" key on the keyboard
+        //event.preventDefault();
+        if (event.key === "Enter" && !promptFinished) {
+            cancelType()
+        }
+    });
+
+    function restart() {
+        setStory("");
+        setPage(0)
+        $(".page").fadeOut(0);
+        $("#full-story").fadeOut(0);
+        $(".page0").fadeIn(1000);
+
+    }
 
 
     return (
@@ -51,8 +78,8 @@ function App() {
             <div className={"page0"}>
                 {/*<img id="day-img" src={"day.png"}/>*/}
                 <img id={"dream-generator-logo"} style={{opacity: ".8"}} src={"title.png"}/>
-                <div className={"centered"} id={"start-button"}>
-                <Button id={"start-button"} onClick={startDream} inverted={true} size={"massive"} content='START' basic />
+                <div className={"centered"} >
+                <Button className={"pronounced-button"} id={"start-button"} onClick={nextPage} inverted={true} size={"massive"} content='START' basic />
                 </div>
             </div>
             {/*/***********************************************************************************************************/}
@@ -60,12 +87,24 @@ function App() {
             {/*                                                Prompt Pages                                               */}
             {/*                                                                                                           */}
             {/* ********************************************************************************************************* */}
-            <div className={"page1 page2 page3"}>
+            <div className={"page"}>
                 <div id={"prompt"}></div>
                 <div id={"dictaphone"}>
-                    <Dictaphone nextPage={startDream} promptFinished={promptFinished}/>
+                    <Dictaphone nextPage={nextPage} promptFinished={promptFinished} story={story} setStory={setStory}/>
                 </div>
             </div>
+
+        {/*/***********************************************************************************************************/}
+        {/*                                                                                                           */}
+        {/*                                                Final Page                                                 */}
+        {/*                                                                                                           */}
+        {/* ********************************************************************************************************* */}
+        <div id={"full-story"}>
+            <div className={"medium"} id={"story"}></div>
+            <Button id={"save-button"} className={"pronounced-button"}  inverted={true} size={"massive"} content='SAVE' basic />
+            <Button id={"save-button"} onClick={restart} className={"pronounced-button"}  inverted={true} size={"massive"} content='RESTART' basic />
+
+        </div>
             {/*/***********************************************************************************************************/}
             {/*                                                                                                           */}
             {/*                                                   Help                                                    */}

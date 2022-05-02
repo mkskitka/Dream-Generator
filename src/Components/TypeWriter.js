@@ -1,12 +1,25 @@
 const speedd = 50;
+let cancel = false;
 export const typeWriter = (id, txt, callback) => {
+    cancel = false;
     var i =0;
     type(i, id, txt, speedd, callback)
 }
 
+export function cancelType() {
+    cancel = true;
+}
+
 function type(i, id, txt, speed, callback) {
+
     if (i < txt.length) {
-        if(txt.charAt(i) === '*') {
+        if(txt.charAt(i) === '$') {
+            clearTxt(i, id, txt, speedd, callback)
+        }
+        else if(cancel) {
+            addChar(i, id, txt, 10, callback);
+        }
+        else if(txt.charAt(i) === '*') {
             i++;
             let seconds = parseInt(txt.charAt(i));
             let ms = seconds * 1000;
@@ -16,11 +29,11 @@ function type(i, id, txt, speed, callback) {
         else if(txt.charAt(i) === '.' || txt.charAt(i) === '?') {
             addChar(i, id, txt, 2000, callback);
         }
+        else if(txt.charAt(i) === '!') {
+            addChar(i, id, txt, 1000, callback);
+        }
         else if(txt.charAt(i) === ',') {
             addChar(i, id, txt, 200, callback);
-        }
-        else if(txt.charAt(i) === '$') {
-            clearTxt(i, id, txt, speedd, callback)
         }
         else {
             addChar(i, id, txt, speedd, callback);
