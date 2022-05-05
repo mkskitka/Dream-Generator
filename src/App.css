@@ -7,7 +7,7 @@
 position: relative;
 }
 #help-button {
-  font-family: "Bubble",  Regular !important;
+  font-family: "Bubble" !important;
   color: white;
   font-size: 36px;
   position: absolute;
@@ -29,7 +29,7 @@ position: relative;
 #prompt {
   width: 80%;
   margin: 0px auto;
-  font-family: "Bubble",  Regular !important;
+  font-family: "Bubble" !important;
   line-height: 1.6;
   color: white;
   font-size: 32px;
@@ -121,7 +121,7 @@ position: relative;
   /*background-color:rgba(242, 0, 101, .9);*/
   /*background-image: linear-gradient(rgba(242, 0, 101, .9), rgba(255, 208, 0, .9));*/
   /*background-color: rgba(255, 208, 255, .95);*/
-  font-family: "Bubble",  Regular !important;
+  font-family: "Bubble" !important;
   background-color: rgba(122, 206, 255,.95);
   border-radius: 8px;
   z-index: 1;
@@ -149,7 +149,7 @@ Button {
 }
 .pronounced-button {
   position: relative;
-  font-family: "Bubble",  Regular !important;
+  font-family: "Bubble" !important;
   animation: pulse 1s infinite;
 }
 
@@ -164,7 +164,7 @@ Button {
 
 #full-story {
   position: relative;
-  font-family: "Bubble",  Regular !important;
+  font-family: "Bubble"!important;
 }
 #story {
   top: 20vh;

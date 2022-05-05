@@ -1,3 +1,8 @@
+#Deploying to Github.io
+change "homepage" property in package.json to "https://mkskitka.github.io/Dream-Generator/"
+and run npm run deploy
+when running locally delete this property. 
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

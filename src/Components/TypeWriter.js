@@ -41,10 +41,10 @@ const charSpeeds = {
     'x': 110,
     'y': 60,
     'z': 100,
-    ' ': randomInt(30, 150),
+    ' ': randomInt(30, 120),
     '.': 1500,
     '?': 1500,
-    '!': 1000,
+    '!': 1200,
     ',': 500
 }
 
@@ -53,6 +53,20 @@ function type(i, id, txt, speed, callback) {
     if (i < txt.length) {
         if(txt.charAt(i) === '$') {
             clearTxt(i, id, txt, speedd, callback)
+        }
+        else if(txt.charAt(i) === '[') {
+            var subString = txt.substring(
+                txt.indexOf("["),
+                txt.indexOf("]")+1
+            );
+            var arr = subString.split(",");
+            var value = arr[randomInt(0, arr.length-1)];
+            value = value.replace("[", '');
+            value = value.replace("]", '');
+            txt = txt.replace(subString, '');
+            console.log("value", value);
+            console.log("txt", txt);
+            addWord(id, value, "black", i, txt, speed, callback)
         }
         else if(cancel) {
             addChar(i, id, txt, 10, callback);
@@ -81,8 +95,22 @@ function clearTxt(i, id, txt, speed, callback) {
     i++;
     setTimeout(() => type(i, id, txt, speed, callback), speed);
 }
-function addChar(i, id, txt, s, callback) {
-    document.getElementById(id).innerHTML += txt.charAt(i);
+function addChar(i, id, txt, s, callback, color="#fff") {
+    document.getElementById(id).innerHTML += "<font color="+color+">"+txt.charAt(i)+"</font>";
     i++;
     setTimeout(() => type(i, id, txt, s, callback), s);
+}
+
+function addWord(id, word, color="#fff", i, txt, speed, callback) {
+    let char = word.charAt(0);
+    word = word.substring(1);
+    document.getElementById(id).innerHTML += "<font color="+color+">"+char+"</font>";
+    if(word === "") {
+        type(i, id, txt, speed, callback);
+    }
+    else {
+        setTimeout(function () {
+            addWord(id, word, color, i, txt, speed, callback)
+        }, 100);
+    }
 }

@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { configureStore  } from '@reduxjs/toolkit'
-
+import "./Fonts/Bubble.woff2";
 import { Provider, createStoreHook, createSelectorHook, createDispatchHook } from 'react-redux';
 import reducer from './Redux/reducer';
 

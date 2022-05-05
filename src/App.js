@@ -51,7 +51,7 @@ function App() {
     useEffect(function (){
         console.log("help page is now ", helpPageOpen)
         if(helpPageOpen) {
-            typeWriter("description", DESCRIPTION)
+            typeWriter("description", DESCRIPTION, ()=>{})
         }
     }, [helpPageOpen])
 

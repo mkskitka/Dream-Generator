@@ -88,6 +88,7 @@ const Dictaphone = (props) => {
 
     useEffect(function () {
         if (promptFinished) {
+            resetTranscript();
             document.getElementById("mic-button").style.visibility = "visible";
             if (!listening) {
                 document.getElementById("mic-button").style.animation = "pulse12 1s infinite";
@@ -128,7 +129,7 @@ const Dictaphone = (props) => {
                              () => {SpeechRecognition.startListening({ continuous: true }); clearMessage();}}></Button>
             </div>
             <p className={"transcript"}>{message}</p>
-            <p className={"transcript"}>{transcript}</p>
+            {promptFinished && <p className={"transcript"}>{transcript}</p> }
         </div>
     );
 };

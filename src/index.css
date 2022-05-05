@@ -16,4 +16,13 @@ code {
 html, body {
   min-height: 100%;
   overflow: hidden;
+}t
+
+@font-face {
+  font-family: 'Bubble';
+  font-style: normal;
+  src: local("Bubble"),
+  url('./Fonts/Bubble.woff2') format("woff2");
+  /*font-weight: bold;*/
 }
+
